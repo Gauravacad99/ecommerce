@@ -1,0 +1,155 @@
+# Sample GraphQL Queries for E-Commerce Analytics API
+
+# Query 1: Get list of customers 
+query GetCustomers {
+  getCustomers {
+    _id
+    name
+    email
+    address {
+      city
+      country
+    }
+    registrationDate
+  }
+}
+
+# Query 2: Get customer spending analysis
+query GetCustomerSpending {
+  getCustomerSpending(customerId: "7895595e-7f25-47fe-a6f8-94b31bfab736") {
+    customer {
+      _id
+      name
+      email
+      address {
+        city
+        country
+      }
+    }
+    totalSpent
+    orderCount
+    averageOrderValue
+    recentOrders {
+      _id
+      total
+      status
+      orderDate
+    }
+    purchasesByCategory {
+      category
+      amount
+      percentage
+    }
+  }
+}
+
+# Query 3: Get top selling products
+query GetTopSellingProducts {
+  getTopSellingProducts(limit: 5) {
+    product {
+      _id
+      name
+      category
+      price
+      stock
+    }
+    totalSold
+    revenue
+    orderCount
+  }
+}
+
+# Query 4: Get sales analytics by date range
+query GetSalesAnalytics {
+  getSalesAnalytics(startDate: "2024-01-01", endDate: "2025-02-28") {
+    totalSales
+    orderCount
+    averageOrderValue
+    salesByDay {
+      date
+      sales
+      orderCount
+    }
+    salesByCategory {
+      category
+      sales
+      percentage
+    }
+    topProducts {
+      product {
+        _id
+        name
+      }
+      totalSold
+      revenue
+    }
+  }
+}
+
+# Query 5: Paginated customer orders
+query GetCustomerOrders {
+  getCustomerOrders(
+    customerId: "7895595e-7f25-47fe-a6f8-94b31bfab736"
+    page: 1
+    limit: 5
+  ) {
+    orders {
+      _id
+      total
+      status
+      orderDate
+      items {
+        product {
+          name
+          price
+          category
+        }
+        quantity
+        price
+      }
+    }
+    totalOrders
+    totalPages
+    currentPage
+    hasNextPage
+    hasPreviousPage
+  }
+}
+
+# Mutation 1: Place a new order
+mutation PlaceOrder {
+  placeOrder(
+    input: {
+      customerId: "7895595e-7f25-47fe-a6f8-94b31bfab736"
+      items: [
+        { productId: "34fad6ef-d906-44ce-ae7a-44453282b0e9", quantity: 2 }
+        { productId: "508220fc-2f77-414e-b9d6-120be0fca340", quantity: 1 }
+      ]
+      paymentMethod: "credit_card"
+      shippingAddress: {
+        street: "123 Main Street"
+        city: "New York"
+        state: "NY"
+        zip: "10001"
+        country: "USA"
+      }
+    }
+  ) {
+    _id
+    customer {
+      name
+      email
+    }
+    items {
+      product {
+        name
+        price
+      }
+      quantity
+      price
+    }
+    total
+    status
+    orderDate
+  }
+} 
