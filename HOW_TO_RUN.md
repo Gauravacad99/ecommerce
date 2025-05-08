@@ -30,7 +30,7 @@ This document provides step-by-step instructions on how to run the API.
    Open your browser and go to http://localhost:4000/graphql
 
 ## Using the API
-
+You can use queries.graphql or Import the `ecommerce-postman-collection.json` file into Postman
 ### Available Queries
 
 1. **Get All Customers**
@@ -176,8 +176,3 @@ You can use the provided Postman collection to test the API:
 2. Make sure your server is running at http://localhost:4000/graphql
 3. Send requests directly from Postman
 
-## Additional Documentation
-
-For detailed explanations of the MongoDB operations used in this application, please refer to:
-
-- **MONGODB_QUERIES.md**: Contains in-depth descriptions of the projections, aggregations, and indexing strategies used in the API 
